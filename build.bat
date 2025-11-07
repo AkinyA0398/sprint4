@@ -24,13 +24,14 @@ if not exist "%TARGET_DIR%" (
     mkdir "%TARGET_DIR%"
 )
 
+rem Copy classes to webapp
+if not exist "%WEBAPP_DIR%\WEB-INF\classes" (
+    mkdir "%WEBAPP_DIR%\WEB-INF\classes"
+)
+xcopy "%CLASSES_DIR%\*" "%WEBAPP_DIR%\WEB-INF\classes\" /E /I /Y
+
 cd "%WEBAPP_DIR%"
 jar cvf "../../%TARGET_DIR%/akip17-1.0-SNAPSHOT.war" *
 cd ../..
-
-rem Add classes to WAR
-cd "%CLASSES_DIR%"
-jar uvf "../%TARGET_DIR%/akip17-1.0-SNAPSHOT.war" *
-cd ..
 
 echo Build complete.

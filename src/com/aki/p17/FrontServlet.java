@@ -101,14 +101,17 @@ public class FrontServlet extends HttpServlet {
 
             // Normalisation pour ignorer le '/' final
             String normalizedPath = path.endsWith("/") ? path.substring(0, path.length() - 1) : path;
+            // Normalisation pour remplacer les underscores par des tirets
+            normalizedPath = normalizedPath.replace('_', '-');
 
             if (urlMappings.containsKey(normalizedPath)) {
                 Method method = urlMappings.get(normalizedPath);
                 Object controllerInstance = method.getDeclaringClass().getDeclaredConstructor().newInstance();
 
+                res.setContentType("text/html;charset=UTF-8");
                 PrintWriter out = res.getWriter();
                 Object result = method.invoke(controllerInstance);
-                res.setContentType("text/html;charset=UTF-8");
+                out.println("Return type: " + method.getReturnType().getSimpleName());
                 out.println(result);
                 return true;
             }

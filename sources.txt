@@ -1,6 +1,6 @@
-A:\sprint3\src\annotation\AnnotationController.java
-A:\sprint3\src\annotation\GetMethode.java
-A:\sprint3\src\com\aki\controllers\TestController.java
-A:\sprint3\src\com\aki\p17\App.java
-A:\sprint3\src\com\aki\p17\FrontServlet.java
-A:\sprint3\src\com\aki\p17\UrlMappingInitializer.java
+A:\sprint4\sprint4\src\annotation\AnnotationController.java
+A:\sprint4\sprint4\src\annotation\GetMethode.java
+A:\sprint4\sprint4\src\com\aki\controllers\TestController.java
+A:\sprint4\sprint4\src\com\aki\p17\App.java
+A:\sprint4\sprint4\src\com\aki\p17\FrontServlet.java
+A:\sprint4\sprint4\src\com\aki\p17\UrlMappingInitializer.java
