@@ -28,7 +28,7 @@ public class FrontServlet extends HttpServlet {
 
     private void scanControllers() {
         try {
-            String controllerPackage = getServletConfig().getInitParameter("Controllers");
+            String controllerPackage = getServletContext().getInitParameter("Controllers");
             if (controllerPackage == null) return;
 
             String packagePath = controllerPackage.replace('.', '/') + "/";
@@ -111,7 +111,7 @@ public class FrontServlet extends HttpServlet {
                 res.setContentType("text/html;charset=UTF-8");
                 PrintWriter out = res.getWriter();
                 Object result = method.invoke(controllerInstance);
-                out.println("Return type: " + method.getReturnType().getSimpleName());
+                out.println("Return type: " + method.getReturnType().getSimpleName().toLowerCase());
                 out.println(result);
                 return true;
             }
@@ -125,15 +125,13 @@ public class FrontServlet extends HttpServlet {
     private void customServe(HttpServletRequest req, HttpServletResponse res) throws IOException {
         try (PrintWriter out = res.getWriter()) {
             String uri = req.getRequestURI();
-            String responseBody = """
-                <html>
-                    <head><title>Resource Not Found</title></head>
-                    <body>
-                        <h1>Unknown resource</h1>
-                        <p>The requested URL was not found: <strong>%s</strong></p>
-                    </body>
-                </html>
-                """.formatted(uri);
+            String responseBody = "<html>" +
+                "<head><title>Resource Not Found</title></head>" +
+                "<body>" +
+                "<h1>Unknown resource</h1>" +
+                "<p>The requested URL was not found: <strong>" + uri + "</strong></p>" +
+                "</body>" +
+                "</html>";
 
             res.setContentType("text/html;charset=UTF-8");
             out.println(responseBody);
